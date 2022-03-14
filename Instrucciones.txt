@@ -1,0 +1,3 @@
+Cres dos carpetas
+1 - musica: esta carpeta es donde se guardan las canciones una vez descargados
+2 - videos: en esta se descargaran los videos para despues convertirlo en formato mp3 y asi reproducirlos
