@@ -5,17 +5,17 @@ Created on Tue Mar  8 01:03:28 2022
 @author: joe
 """
 
-from re import A
-from numpy import vdot, where
 import pytube
 from moviepy.editor import *
-from os import link, remove, rename
+from os import remove, rename
 import os
 import sys
 import pygame
+import glob
 def app():
     if os.path.exists('videos/') and os.path.exists('musica/'):
-        print('Los directorios ya están creados')
+        #print('Los directorios ya están creados')
+        print()
     else:
         os.mkdir('videos/')
         os.mkdir('musica/')    
@@ -26,7 +26,6 @@ def app():
         url = input('> ')
         if len(url) > 0:
             descargar_video(url)
-            iniciar = False
         else:
             print("No a ingresado ningún link")
     
@@ -108,5 +107,18 @@ def reproducir_audio(musica_nombre):
             pygame.mixer.music.set_volume(0.6)
         elif opcion == '!vol 100':
             pygame.mixer.music.set_volume(1.0)
+        elif opcion == '!exit':
+            pygame.mixer.music.stop()
+            eliminar_canciones()
+
+def eliminar_canciones():
+    ruta_musicas = glob.glob('musica/*.mp3')
+    for musica in ruta_musicas:
+        try:
+            os.remove(musica)
+        except OSError as e:
+            print(f"Error: {e.strerror}")
+    sys.exit()
+    
     
 app()
